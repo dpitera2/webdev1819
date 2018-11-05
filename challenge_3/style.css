@@ -1,0 +1,12 @@
+body {
+    background-color: #33ccff;
+    
+}
+h1 {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background-color: #00e64d;
+    color: #001a66;
+    font-family:"Dancing Script";
+}
