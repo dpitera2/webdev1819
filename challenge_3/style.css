@@ -8,5 +8,69 @@ h1 {
     text-align: center;
     background-color: #00e64d;
     color: #001a66;
-    font-family:"Dancing Script";
+    font-family: "KoHo";
+}
+h2 {
+    position: relative;
+    text-align: center;
+    bottom: -100px;
+}
+.button {
+    position: relative;
+    text-align: center;
+    border-style: solid;
+    border-color: #006600;
+    top: 100px;
+    width:30%;
+    margin-left: 5%;
+    padding-top: 10px;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-bottom: 10px;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+}
+.img{
+    position: relative;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-bottom: 10px;
+}
+.border{
+    position: relative;
+    padding-bottom: -30px;
+    bottom: -130px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+p {
+    position: relative;
+}
+.column {
+    float: left;
+    width: 28%;
+    padding: 4px;
+}
+.second-paragraph {
+    position:absolute;
+    bottom: -100px;
+}
+.break {
+    position: absolute;
+    bottom: 100px;
+    border-top-color: black;
+    border-top: solid;
+    border-width: 1px;
+    padding-right: 1920px;
+    padding-left: 200px;
+    left: -150px;
+}
+.second-header{
+    position: absolute;
+    bottom: 40px;
+    left: 0px;
+    text-align: center;
 }
