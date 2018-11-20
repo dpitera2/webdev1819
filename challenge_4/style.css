@@ -1,0 +1,15 @@
+body{
+    background-color: #33ccff;
+}
+.card{
+    background-color: #b3ffb3;
+}
+img{
+    text-align: center;
+}
+.card-title{
+    text-align: center;
+}
+.card-text{
+    text-align: center;
+}
