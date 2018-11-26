@@ -6,7 +6,10 @@ img{
     margin-right: auto;
 }
 .card{
-    background-color: #b3ffb3;
+    background-color: #e6ffff;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 0px 0px 0px;
 }
 .card-title{
     text-align: center;
