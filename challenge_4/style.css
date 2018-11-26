@@ -1,11 +1,12 @@
 body{
-    background-color: #33ccff;
+    background-color: #ccf3ff;
+}
+img{
+    margin-left: auto;
+    margin-right: auto;
 }
 .card{
     background-color: #b3ffb3;
-}
-img{
-    text-align: center;
 }
 .card-title{
     text-align: center;
