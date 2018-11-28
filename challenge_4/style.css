@@ -1,19 +1,38 @@
 body{
     background-color: #ccf3ff;
 }
+h5{
+    font-family: 'Bellefair';
+    font-size: 28px;
+}
 img{
     margin-left: auto;
     margin-right: auto;
+    padding: 0px 0px 0px 0px;
+}
+p{
+    font-family: 'Baumans';
 }
 .card{
-    background-color: #e6ffff;
+    
+    background-color: hsl(180, 100%, 98%);
     margin-left: auto;
     margin-right: auto;
     padding: 0px 0px 0px 0px;
+    height: 90%;
+    width: 100%;
 }
 .card-title{
     text-align: center;
 }
 .card-text{
     text-align: center;
+}
+.card-deck{
+    width: 100%;
+    height: 470px;
+    background-color: #e6ffff
+}
+.display-4{
+    font-family: 'Black Han Sans';
 }
