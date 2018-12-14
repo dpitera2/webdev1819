@@ -1,0 +1,35 @@
+div{
+    background-color:#ffb84d;
+}
+h4{
+    color:#ffb84d;
+}
+img{
+    background-color:#ffb84d;
+    margin-bottom: 10px;
+}
+p{
+    
+}
+.card{
+    background-color:#ffb84d;
+    border-color:#ffb84d;
+    width: 200px;
+ 
+    margin-right: 1000px;
+}
+.col-sm-8{
+    margin-top: 30px;
+}
+.display-4{
+    font-family:Aclonica;
+    text-align: center;
+}
+.jumbotron{
+    margin:0px;
+    background-image:url("Garfield/garfle.png");
+}
+.row{
+    margin: 0px;
+    padding: 0px;
+}
