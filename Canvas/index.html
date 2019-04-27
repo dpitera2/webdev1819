@@ -13,40 +13,83 @@
             var canvas = document.querySelector("#myCanvas");
             var context = canvas.getContext("2d");
             
+            animate();
+            
+            function animate(){
+                var speed = 0.2 + Math.random()*3;
+                draw();
+                requestAnimationFrame(animate);
+            }
+            
+            function draw(speed){
+                outerD(speed);
+                innerD(speed);
+                outerP(speed);
+                innerP(speed);
+                context.lineWidth =7;
+                context.strokeStyle = "black";
+                context.stroke();
+            }
+            
             //Outer D
-            context.moveTo(35, 300);
-            context.lineTo(35, 100);
-            context.lineTo(75, 100);
-            context.quadraticCurveTo(185, 100, 185, 200);
-            context.quadraticCurveTo(185, 300, 75, 300);
-            context.closePath();
+            
+            function outerD(speed){
+                context.moveTo(35, 300);
+                context.lineTo(35, 100);
+                context.lineTo(75, 100);
+                context.quadraticCurveTo(185, 100, 185, 200);
+                context.quadraticCurveTo(185, 300, 75, 300);
+                context.closePath();
+                this.speed = speed;
+            }
+            this.speed = speed;
+            
+            /*context.beginPath();
+ 
+            context.arc(this.xPos + Math.cos(this.counter / 100) * this.radius,
+            this.yPos + Math.sin(this.counter / 100) * this.radius,
+            this.width,
+            0,
+            Math.PI * 2,
+            false);
+ 
+            context.closePath();*/
             
             //Inner D
-            context.moveTo(55, 280);
-            context.lineTo(55, 120);
-            context.lineTo(75, 120);
-            context.quadraticCurveTo(165, 120, 165, 190);
-            context.quadraticCurveTo(175, 280, 75, 280);
-            context.closePath();
+            
+            function innerD(){
+                context.moveTo(55, 280);
+                context.lineTo(55, 120);
+                context.lineTo(75, 120);
+                context.quadraticCurveTo(165, 120, 165, 190);
+                context.quadraticCurveTo(175, 280, 75, 280);
+                context.closePath();
+                this.speed = speed;
+            }
             
             //Outer P
-            context.moveTo(220, 300);
-            context.lineTo(220, 100);
-            context.lineTo(240, 100);
-            context.quadraticCurveTo(330, 100, 330, 150);
-            context.quadraticCurveTo(330, 200, 240, 200);
-            context.closePath();
+            
+            function outerP(){
+                context.moveTo(220, 300);
+                context.lineTo(220, 100);
+                context.lineTo(240, 100);
+                context.quadraticCurveTo(330, 100, 330, 150);
+                context.quadraticCurveTo(330, 200, 240, 200);
+                context.closePath();
+                this.speed = speed;
+            }
             
             //Inner P 
-            context.moveTo(250, 170);
-            context.lineTo(250, 130);
-            context.quadraticCurveTo(300, 130, 300, 150);
-            context.quadraticCurveTo(300, 170, 250, 170);
-            context.closePath();
             
-            context.lineWidth =7;
-            context.strokeStyle = "black";
-            context.stroke();
+            function innerP(){
+                context.moveTo(250, 170);
+                context.lineTo(250, 130);
+                context.quadraticCurveTo(300, 130, 300, 150);
+                context.quadraticCurveTo(300, 170, 250, 170);
+                context.closePath();
+                this.speed = speed;
+            }
+            
         </script>
     </body>
 </html>
