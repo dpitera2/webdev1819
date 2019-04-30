@@ -11,38 +11,69 @@
         </canvas>
         <script>
             var canvas = document.querySelector("#myCanvas");
-            var context = canvas.getContext("2d");
-            
+            const context = canvas.getContext("2d");
+            var xPos = -50;
+            var yPos = 0;
+            // var frameCounter = 0;
             animate();
+            setInterval(animate, 70);
             
             function animate(){
-                var speed = 0.2 + Math.random()*3;
+                // var speed = 0.2 + Math.random()*3;
+                context.clearRect(0, 0, 400, 400);
+                context.fillStyle = "#ffff00";
+                context.fillRect(0, 0, 400, 400);
+                // context.beginPath();
+                // context.arc(xPos, 100, 75, 0, Math.PI * 2, false);
+                // context.endPath();
                 draw();
-                requestAnimationFrame(animate);
+                //context.clearRect(0, 0, 400, 400);
+                //context.arc(xPos, 100, 75, 0, Math.PI * 2, false);
+                //requestAnimationFrame(animate);
+                xPos += 8;
+                yPos += 4;
+                if (xPos > 125) {
+                    xPos = -50;
+                }
+                if (yPos > 125){
+                    yPos = 0;
+                }
             }
             
             function draw(speed){
+                
+                
+                // frameCounter++;
+                // if (frameCounter % 4 == 0) {
+                    
+                //     context.clearRect(0, 0, 400, 400);
+                //     context.fillStyle = "#ffff00";
+                //     context.fillRect(0, 0, 400, 400);
+                // }
                 outerD(speed);
                 innerD(speed);
                 outerP(speed);
                 innerP(speed);
-                context.lineWidth =7;
-                context.strokeStyle = "black";
+                
+                context.lineWidth = 3;
+                context.strokeStyle = getRandomColor();
                 context.stroke();
+                xPos += 5;
+                yPos += 4;
             }
             
             //Outer D
             
-            function outerD(speed){
-                context.moveTo(35, 300);
-                context.lineTo(35, 100);
-                context.lineTo(75, 100);
-                context.quadraticCurveTo(185, 100, 185, 200);
-                context.quadraticCurveTo(185, 300, 75, 300);
+            function outerD(speed, xPos){
+                context.moveTo(35 + xPos, 300 + xPos);
+                context.lineTo(35 + xPos, 100 + xPos);
+                context.lineTo(75 + xPos, 100 + xPos);
+                context.quadraticCurveTo(185 + xPos, 100 + xPos, 185 + xPos, 200 + xPos);
+                context.quadraticCurveTo(185 + xPos, 300 + xPos, 75 + xPos, 300 + xPos);
                 context.closePath();
-                this.speed = speed;
+                //this.speed = speed;
             }
-            this.speed = speed;
+            //this.speed = speed;
             
             /*context.beginPath();
  
@@ -58,36 +89,45 @@
             //Inner D
             
             function innerD(){
-                context.moveTo(55, 280);
-                context.lineTo(55, 120);
-                context.lineTo(75, 120);
-                context.quadraticCurveTo(165, 120, 165, 190);
-                context.quadraticCurveTo(175, 280, 75, 280);
+                context.moveTo(55 + xPos, 280 + xPos);
+                context.lineTo(55 + xPos, 120 + xPos);
+                context.lineTo(75 + xPos, 120 + xPos);
+                context.quadraticCurveTo(165 + xPos, 120 + xPos, 165 + xPos, 190 + xPos);
+                context.quadraticCurveTo(175 + xPos, 280 + xPos, 75 + xPos, 280 + xPos);
                 context.closePath();
-                this.speed = speed;
+                //this.speed = speed;
             }
             
             //Outer P
             
             function outerP(){
-                context.moveTo(220, 300);
-                context.lineTo(220, 100);
-                context.lineTo(240, 100);
-                context.quadraticCurveTo(330, 100, 330, 150);
-                context.quadraticCurveTo(330, 200, 240, 200);
+                context.moveTo(220 + yPos, 300 + yPos);
+                context.lineTo(220 + yPos, 100 + yPos);
+                context.lineTo(240 + yPos, 100 + yPos);
+                context.quadraticCurveTo(330 + yPos, 100 + yPos, 330 + yPos, 150 + yPos);
+                context.quadraticCurveTo(330 + yPos, 200 + yPos, 240 + yPos, 200 + yPos);
                 context.closePath();
-                this.speed = speed;
+                //this.speed = speed;
             }
             
             //Inner P 
             
             function innerP(){
-                context.moveTo(250, 170);
-                context.lineTo(250, 130);
-                context.quadraticCurveTo(300, 130, 300, 150);
-                context.quadraticCurveTo(300, 170, 250, 170);
+                context.moveTo(250 + yPos, 170 + yPos);
+                context.lineTo(250 + yPos, 130 + yPos + yPos);
+                context.quadraticCurveTo(300 + yPos, 130 + yPos, 300 + yPos, 150 + yPos);
+                context.quadraticCurveTo(300 + yPos, 170 + yPos, 250 + yPos, 170 + yPos);
                 context.closePath();
-                this.speed = speed;
+                //this.speed = speed;
+            }
+            
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
             }
             
         </script>

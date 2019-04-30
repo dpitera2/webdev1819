@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            canvas{
+                padding: 0px;
+                margin: 0px;
+                background-color: #eee;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id = myCanvas width="480px" height="320px">
+        </canvas>
+        <script>
+            var canvas = document.querySelector("#myCanvas");
+            var context = canvas.getContext("2d");
+            context.beginPath();
+            context.arc(240, 160, 20, 0, Math.PI*2, false);
+            context.fillStyle = "red";
+            context.fill();
+            context.closePath();
+            
+            function draw(){
+                context.beginPath();
+                context.arc(50, 50, 10, 0, Math.PI*2);
+                context.fillStyle = "orange";
+                context.fill();
+                context.closePath();
+
+            }
+            setInterval(draw, 10);
+            var x = canvas.width/2;
+            var y = canvas.height - 30;
+            console.log(x + "" + y);
+
+        </script>
+    </body>
+</html>
