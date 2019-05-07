@@ -16,25 +16,246 @@
         <script>
             var canvas = document.querySelector("#myCanvas");
             var context = canvas.getContext("2d");
-            context.beginPath();
-            context.arc(240, 160, 20, 0, Math.PI*2, false);
-            context.fillStyle = "red";
-            context.fill();
-            context.closePath();
-            
-            function draw(){
-                context.beginPath();
-                context.arc(50, 50, 10, 0, Math.PI*2);
-                context.fillStyle = "orange";
-                context.fill();
-                context.closePath();
-
-            }
-            setInterval(draw, 10);
             var x = canvas.width/2;
             var y = canvas.height - 30;
+            var score = 0;
+            var lives = 3;
+            var t = 0;
+            var dy = 1.5;
+            var dx = 1.5;
+            var ballRadius = 10;
+            var paddleHeight = 10;
+            var paddleWidth = 75;
+            var paddleX = (canvas.width - paddleWidth)/2;
+            //var paddleY = (canvas.height - paddleHeight);
+            var rightPressed = false;
+            var leftPressed = false;
+            var brickRowCount = 3;
+            var brickColumnCount = 5;
+            var brickWidth = 75;
+            var brickHeight = 20;
+            var brickPadding = 10;
+            var brickOffsetTop = 30;
+            var brickOffsetLeft = 30;
+            var bricks = [];
+            for(var c = 0; c < brickColumnCount; c++){
+            	bricks[c] = [];
+            	for(var r = 0; r < brickRowCount; r++){
+            		bricks[c][r] = { x:0, y:0, status:1 };
+            	}
+            }
+            function collisionDetection() {
+                for(var c = 0; c < brickColumnCount; c++){
+                    for(var r = 0; r < brickRowCount; r++){
+                        var b = bricks[c][r];
+                        if(b.status == 1){
+                            if(x + ballRadius > b.x && x - ballRadius < b.x+brickWidth && y + ballRadius > b.y && y - ballRadius < b.y + brickHeight){
+                            dy = -dy;
+                            b.status = 0;
+                            score = score + 1;
+                            if(score == 15){
+                                alert("You Win");
+                                x = canvas.width / 2;
+                                y = canvas.height - 30;
+                                dx = 1.5;
+                                dy = -1.5;
+                                ballRadius = 10;
+                                paddleHeight = 10;
+                                paddleWidth = 75;
+                                paddleX = (canvas.width - paddleWidth) / 2;
+                                rightPressed = false;
+                                leftPressed = false;
+                                brickRowCount = 3;
+                                brickColumnCount = 5;
+                                brickWidth = 75;
+                                brickHeight = 20;
+                                brickPadding = 10;
+                                brickOffsetTop = 30;
+                                brickOffsetLeft = 30;
+                                score = 0;
+                                lives = 3;
+                                document.location.reload();
+                            }
+                            }
+                        }
+                    }
+                }
+            }
+            function drawScore(){
+                context.font = "16px Arial";
+                context.fillStyle = "white";
+                context.fillText("Score: " + score, 8, 20);
+            }
+            function drawLives(){
+                context.font = "16px Arial";
+                context.fillStyle = "white";
+                context.fillText("Lives: " + lives, 80, 20);
+            }
+            function drawBall(){
+                context.beginPath();
+                context.arc(x, y, ballRadius, 0, Math.PI*2);
+                // var gradient = context.createLinearGradient(75, 0, 325, 0);
+                // gradient.addColorStop(0.33, getRandomColorGrad());
+                // gradient.addColorStop(0.66, getRandomColorGrad());
+                // gradient.addColorStop(1.00, getRandomColorGrad());
+                // context.fillStyle = gradient;
+                // context.fill();
+                context.fillStyle = "pink";
+                context.fill();
+                context.closePath();
+                if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){
+                    dx = -dx;
+                }
+                if(y + dy < ballRadius){
+                	dy = -dy;
+                    } else if(y + dy + ballRadius - 2> canvas.height - ballRadius) {
+                    	if(x > paddleX && x < paddleX + paddleWidth) {
+                            dy = -dy;
+                     	} else {
+                            lives--;
+                            if (lives == 0) {
+                                //alert("GAME OVER");
+                                x = canvas.width / 2;
+                                y = canvas.height - 30;
+                                dx = 1.5;
+                                dy = -1.5;
+                                ballRadius = 10;
+                                paddleHeight = 10;
+                                paddleWidth = 75;
+                                paddleX = (canvas.width - paddleWidth) / 2;
+                                rightPressed = false;
+                                leftPressed = false;
+                                brickRowCount = 3;
+                                brickColumnCount = 5;
+                                brickWidth = 75;
+                                brickHeight = 20;
+                                brickPadding = 10;
+                                brickOffsetTop = 30;
+                                brickOffsetLeft = 30;
+                                score = 0;
+                                lives = 3;
+                                document.location.reload();
+                            }
+                            else {
+                                x = canvas.width / 2;
+                                y = canvas.height - 30;
+                                dx = 1.5;
+                                dy = -1.5;
+                                ballRadius = 10;
+                                paddleHeight = 10;
+                                paddleWidth = 75;
+                                paddleX = (canvas.width - paddleWidth) / 2;
+                                rightPressed = false;
+                                leftPressed = false;
+                            }
+                        }
+                    }
+                }
+            function drawBricks() {
+                for(var c = 0; c < brickColumnCount; c++){
+                    for(var r = 0; r < brickRowCount; r++){
+                        var brickX = (c*(brickWidth + brickPadding)) + brickOffsetLeft;
+                        var brickY = (r*(brickHeight + brickPadding)) + brickOffsetTop;
+                        if(bricks[c][r].status == 1){
+                            bricks[c][r].x = brickX;
+                            bricks[c][r].y = brickY;
+                            context.beginPath();
+                            context.rect(brickX, brickY, brickWidth, brickHeight);
+                            context.fillStyle = "#ffffff";
+                            context.fill();
+                            context.closePath();
+                        }
+                    }
+                }
+            }
+            function drawPaddle(){
+            	context.beginPath();
+            	context.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+            	context.fillStyle = "red";
+            	context.fill();
+            	context.closePath();
+            }
+            function keyDownHandler(e){
+            	if(e.keyCode == 39){
+            		rightPressed = true;
+            	} else if(e.keyCode == 37){
+            		leftPressed = true;
+            	}
+            }
+            function keyUpHandler(e){
+            	if(e.keyCode == 39){
+            		rightPressed = false;
+            	} else if(e.keyCode == 37){
+            		leftPressed = false;
+            	}
+            }
+            function draw(){
+            	context.clearRect(0, 0, canvas.width, canvas.height);
+            	collisionDetection();
+            	drawScore();
+            	drawLives();
+            	drawBall();
+            	drawPaddle();
+            	drawBricks();
+            	if(rightPressed) {
+                	paddleX += 2;
+                } else if(leftPressed){
+                	paddleX -= 2;
+                }
+            	x += dx;
+            	y += dy;
+            }
+            function getRandomColorGrad() {
+                t++;
+                if(t == 0){
+                    var color3 = color2;
+                    return color3;
+                }
+                if(t == 1){
+                    var color2 = color;
+                    return color2;
+                }
+                if(t == 2){
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    return color;
+                    t == 0;
+                    }
+                }
+            }
+            // function colorDefine() {
+            //     t++;
+            //     if(t == 3) {
+            //         var color3 = color2;
+            //         var color2 = color1;
+            //         var color1 = getRandomColor();
+            //         t == 0;
+            //     }
+            // }
+            // function colorSend1() {
+            //     return color1;
+            // }
+            // function colorSend2() {
+            //     return color2;
+            // }
+            // function colorSend3() {
+            //     return color3;
+            // }
+            // function colorChange() {
+            //     colorDefine();
+            //     var gradient = context.createLinearGradient(75 + x , 0, 325, 0);
+            //     gradient.addColorStop(0.33, colorSend1);
+            //     gradient.addColorStop(0.66, colorSend2);
+            //     gradient.addColorStop(1.00, colorSend3);
+            //     context.fillStyle = gradient;
+            //     context.fill();
+            // }
+            document.addEventListener("keydown", keyDownHandler, false);
+            document.addEventListener("keyup", keyUpHandler, false);
+            setInterval(draw, 10);
             console.log(x + "" + y);
-
         </script>
     </body>
 </html>
